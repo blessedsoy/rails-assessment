@@ -1,0 +1,2 @@
+module SampleSalesHelper
+end
