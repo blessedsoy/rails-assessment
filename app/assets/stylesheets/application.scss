@@ -1,0 +1,181 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ //= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+body{
+  font-family: Roboto, helvetica;
+  heiht: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/*************************     
+  Home page
+*************************/
+
+.menu {
+  font-size: 16px;
+  position: absolute;
+  right: 30px;  
+}
+.menu a{
+  color: black;
+}
+
+.menu li{
+  /*border: 2px solid green;*/
+}
+
+
+#front_image img{
+   position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   margin: auto;
+   height: 50%;
+
+}
+
+/**************************
+/ samplesale page
+***************************/
+
+.centered-box{
+  position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   margin: auto;
+   height: 50%;
+   text-align: center;
+}
+
+.centered-box2{
+  position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   margin: auto;
+   margin-top: 150px;
+}
+
+.centered-box3{
+  position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   margin: auto;
+   height: 80%;
+   text-align: center;
+   margin-top: 100px;
+}
+
+.centered-box4{
+  position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   margin: auto;
+   height: 50%;
+   text-align: center;
+   margin-top: 200px;
+}
+
+.table-box{
+  width: 45%;
+  height: 600px;
+  overflow: scroll;
+}
+
+.table-box2{
+  width: 70%;
+  height: 600px;
+  overflow: scroll;
+}
+
+.table-box3{
+  width: 50%;
+  height: 500px;
+  overflow: scroll;
+}
+
+.right{
+  /*text-align: right;*/
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.center{
+  text-align: center;
+}
+
+.like_before {
+  font-size: 25px;
+  color: grey;
+}
+
+.like_after {
+  font-size: 25px;
+  color: green;
+}
+
+.dislike_before {
+  font-size: 25px;
+  color: grey;
+}
+
+.dislike_after {
+  font-size: 25px;
+  color: grey;
+}
+
+.total{
+  position: relative;
+  left: 15px;
+}
+
+.total2{
+  position: relative;
+  left: 12px;  
+}
+
+.brand{
+  font-size: 70px;
+  margin-top: 60px;
+}
+
+.title{
+  font-size: 50px;
+  font-weight: bold;
+  /*background-color: gray;*/
+  color: black;
+  margin-top: 100px;
+  position: relative;
+  top: 100px;
+
+}
