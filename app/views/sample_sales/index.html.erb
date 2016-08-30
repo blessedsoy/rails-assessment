@@ -1,0 +1,147 @@
+
+    <h1 class="center" style="margin-top: 70px">Summer Sample Sales in NYC</h1>
+<br>
+<!-- 
+<%= button_to "Sort By Dates", sample_sales_path, method: :get %>
+<%= button_to "Sort By Likes", sort_by_likes_path, method: :get %>
+ -->
+  <!-- <table>
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td> </td>
+        <td><strong>Brand</strong></td>
+        <td><strong>About</strong></td>
+        <td><strong>Dates</strong></td>
+        <td><strong>Hours</strong></td>
+        <td><strong>Address</strong></td>
+        <td><strong>Map</strong></td>
+        <td><strong>Like</strong></td>
+        <td><strong>Total</strong></td>
+        <td><strong>Dislike </td>
+        <td><strong>Total</strong></td>
+      </tr>
+
+      <%= form_tag(add_to_list_path) do %>
+        <% @sample_sales.each do |sample_sale| %>
+        <tr>
+
+          <td><% if  !current_user || !(current_user.lists.any?{|x| x.sample_sale == sample_sale}) %>
+              <%= check_box_tag "sample_sales_ids[]", sample_sale.id, current_user && sample_sale.added_to_list?(current_user) ? true : false %>
+              <% end %></td> 
+          <td><%= sample_sale.brand %></td>
+          <td><%= sample_sale.about %></td>
+          <td><%= sample_sale.dates %></td>
+          <td><%= sample_sale.hours %></td>
+          <td><%= sample_sale.address %></td>
+          <td><%= link_to "#{sample_sale.brand}", sample_sale_path(sample_sale) %></td>
+
+          <td>
+            <% if current_user %>
+             <% if sample_sale.current_like(current_user.id) < 1 %>
+              <%= link_to "like", like_path(sample_sale: sample_sale), method: :post, class:"liked" %>
+            <% else %>
+              <%= link_to "like", like_path(sample_sale: sample_sale), method: :post, class:"not_yet_liked" %>
+            <% end %>
+            <% end %>
+          </td>
+          <td>
+            <%= sample_sale.total_likes %>
+          </td>
+          <td>
+           <% if current_user %>
+            <% if sample_sale.current_dislike(current_user.id) > -1 %>
+              <%= link_to "dislike", dislike_path(sample_sale: sample_sale), method: :post, class:"disliked" %>
+            <% else %>
+              <%= link_to "dislike", dislike_path(sample_sale: sample_sale), method: :post, class:"not_yet_disliked" %>
+            <% end %>
+            <% end %>
+          </td>
+          <td>
+            <%= sample_sale.total_dislikes %>
+          </td>
+       </tr>
+        <% end %>
+      <%= submit_tag "Add to my list" %>
+      <% end %>
+      
+    </tbody>
+  </table> -->
+<div class="table-box centered-box2">
+  <table class="table table-hover">
+    <thead class="thead-inverse">
+      <tr>
+        <th>#</th>
+        <th>Brand</th>
+        <th>Dates</th>
+        <th>Address</th>
+        <th>Like</th>
+        <th>Total</th>
+        <th>Dislike</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= form_tag(add_to_list_path) do %>
+      <% @sample_sales.each do |sample_sale| %>
+      <tr>
+        <td scope="row"><% if  !current_user || !(current_user.lists.any?{|x| x.sample_sale == sample_sale}) %>
+                <%= check_box_tag "sample_sales_ids[]", sample_sale.id, current_user && sample_sale.added_to_list?(current_user) ? true : false %>
+                <% end %>
+        </td>
+          <% if current_user %>
+            <td><%= link_to sample_sale.brand, sample_sale_path(sample_sale)%></td>
+            <td><%= link_to sample_sale.dates, sample_sale_path(sample_sale) %></td>
+            <td><%= link_to sample_sale.address, sample_sale_path(sample_sale) %></td>
+          <% else %>
+            <td><%= link_to sample_sale.brand, new_user_session_path %></td>
+            <td><%= link_to sample_sale.dates, new_user_session_path %></td>
+            <td><%= link_to sample_sale.address, new_user_session_path %></td>
+          <% end %>
+
+            <td><% if current_user %>
+               <% if sample_sale.current_like(current_user.id) < 1 %>
+               <div class="">
+                <%= link_to "", like_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-o-up center like_before" %>                 
+               </div>
+              <% else %>
+                <div class="">
+                  <%= link_to "", like_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-up center like_after" %>
+                </div>  
+              <% end %>
+            <% else %>
+               <%= link_to "", new_user_session_path, class:"fa fa-thumbs-o-up center like_before" %>
+            <% end %></td>
+        <td class="total"><%= sample_sale.total_likes %></td>
+        <td><% if current_user %>
+              <% if sample_sale.current_dislike(current_user.id) > -1 %>
+                <%= link_to "", dislike_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-o-down dislike_before" %>
+              <% else %>
+                <%= link_to "", dislike_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-down dislike_after" %>
+              <% end %>
+             <% else %>
+               <%= link_to "",  new_user_session_path, class:"fa fa-thumbs-o-down dislike_before" %>
+            <% end %></td>
+        <td class="total2"><%= sample_sale.total_dislikes %></td>
+      </tr>
+      <% end %>
+        <div class="left"> 
+          <%= submit_tag "Add to my list", class:"btn btn-default"%>
+        </div>
+      <% end %>
+
+      <div class="btn-group right">
+          <%= link_to "Sort By Dates", sample_sales_path, method: :get, class:"btn btn-default"%>
+          <%= link_to "Sort By Likes", sort_by_likes_path, method: :get, class:"btn btn-default"%>    
+      </div>
+
+    </tbody>
+  </table>
+</div>
+
+
