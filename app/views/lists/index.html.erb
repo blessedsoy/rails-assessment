@@ -1,0 +1,113 @@
+<div class="list">
+  <h1 class="center" style="margin-top: 70px">Your Sample Sale List</h1>
+  <br>
+
+ <!--  <table>
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><strong>Brand</strong></td>
+        <td><strong>About</strong></td>
+        <td><strong>Dates</strong></td>
+        <td><strong>Hours</strong></td>
+        <td><strong>Address</strong></td>
+        <td><strong>Delete</strong></td>
+      </tr>
+
+        <% @lists.each do |list| %>
+          <tr>
+            <td><%= list.sample_sale.brand %></td>
+            <td><%= list.sample_sale.about %></td>
+            <td><%= list.sample_sale.dates %></td>
+            <td><%= list.sample_sale.hours %></td>
+            <td><%= list.sample_sale.address %></td>
+            <td><%= button_to "X", list_path(list), method: :delete %></td>
+          </tr>
+
+          <tr>
+            <td>
+              <% if !list.memo %>
+                <%= form_for (Memo.new) do |f| %>
+                  <%= f.hidden_field 'list_id', :value => list.id %>
+                  <%= f.text_field :content, :placeholder => "leave a memo", :size => 150 %>
+                <%= f.submit %>
+                <% end %>
+              <% else %>
+
+                <%= form_for(list.memo) do |f| %> 
+                  <%= f.hidden_field 'list_id', :value => list.id %>
+                  <%= f.hidden_field 'id', :value => list.memo.id %>
+                  <%= f.text_field :content, :placeholder => "update a memo", :size => 150 %>
+                  <%= f.submit "Edit" %>
+                <% end %>
+                  <%= button_to 'Delete', memo_path(list.memo), method: :delete %> 
+
+              <% end %>
+            </td>
+          </tr>
+
+        <% end %>
+
+    </tbody>
+  </table> -->
+<div class="table-box2 centered-box2">
+  <div class="btn-group right">
+    <%= link_to "Sort By Dates", sort_by_dates_path, method: :get, class:"btn btn-default" %>
+    <%= link_to "Sort By Default", lists_path, method: :get, class:"btn btn-default" %>     
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><strong>Brand</strong></th>
+        <th><strong>About</strong></th>
+        <th><strong>Dates</strong></th>
+        <th><strong>Hours</strong></th>
+        <th><strong>Address</strong></th>
+        <th><strong>Delete</strong></th>
+        <th><strong>Memo</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+       <% @lists.each do |list| %>
+      <tr>
+        <td><%= list.sample_sale.brand %></td>
+        <td><%= list.sample_sale.about %></td>
+        <td><%= list.sample_sale.dates %></td>
+        <td><%= list.sample_sale.hours %></td>
+        <td><%= list.sample_sale.address %></td>
+        <td><%= button_to "X", list_path(list), method: :delete, class:"btn btn-default btn-sm btn-danger" %></td>
+        <td><% if !list.memo %>
+              <%= form_for (Memo.new) do |f| %>
+                  <%= f.hidden_field 'list_id', :value => list.id %>
+                  <%= f.text_area :content, :placeholder => "leave a memo", :rows => 2, :cols => 30 %>
+                <%= f.submit "Create", class:"btn btn-default btn-sm btn-success" %>
+              <% end %>
+            <% else %>
+              <%= form_for(list.memo) do |f| %> 
+                <%= f.hidden_field 'list_id', :value => list.id %>
+                <%= f.hidden_field 'id', :value => list.memo.id %>
+                <%= f.text_area :content, :placeholder => "update a memo", :rows => 2, :cols => 30 %>
+                <div class="btn-group">
+                <%= f.submit "Edit", class:"btn btn-default btn-sm btn-info" %>
+                <%= button_to 'Delete', memo_path(list.memo), method: :delete, class:"btn btn-default btn-sm btn-danger" %> 
+                </div>
+              <% end %>
+                
+                
+            <% end %>
+              
+        </td>
+      </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+</div>
+
+</div>
+

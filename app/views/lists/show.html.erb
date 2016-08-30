@@ -1,0 +1,32 @@
+<div class="memo">
+      <h1>Edit Memo</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><strong>Brand</strong></td>
+        <td><strong>About</strong></td>
+        <td><strong>Dates</strong></td>
+        <td><strong>Hours</strong></td>
+        <td><strong>Address</strong></td>
+        <td><strong>Map</strong></td>
+      </tr>
+
+          <tr>
+            <td><%= @list.sample_sale.about %></td>
+            <td><%= @list.sample_sale.dates %></td>
+            <td><%= @list.sample_sale.hours %></td>
+            <td><%= @list.sample_sale.address %></td>
+            <td><%= link_to "memo", list_path(@list) %></td>
+          </tr>
+
+
+    </tbody>
+  </table>
+</div>
