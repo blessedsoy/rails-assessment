@@ -2,11 +2,25 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
   
   def create
-    @list = List.create_or_find_by(list_params)
+    if !current_user
+      redirect_to new_user_session_path
+    else
+      if params[:sample_sales_ids] || current_user.lists
+        if params[:sample_sales_ids]
+          @lists = List.create_from_sample_sales(current_user.id, params[:sample_sales_ids]) 
+        else
+          @lists = current_user.lists 
+        end
+        redirect_to lists_path
+      else
+        redirect_to sample_sales_path 
+      end
+    end
   end
 
   def index
     @lists = current_user.lists if current_user.lists
+    @memo ? @memo : Memo.new
   end
 
   def show
@@ -28,7 +42,7 @@ class ListsController < ApplicationController
   private
 
     def list_params
-      params.require(:list).permit(:user_id, sample_sale_ids:[])
+      params.require(:list).permit(:user_id, sample_sales_ids:[])
     end
 
 end
