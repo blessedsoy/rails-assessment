@@ -3,12 +3,11 @@
   <head>
     <title>RailsAssessment</title>
     <%= csrf_meta_tags %>
-
     
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <%= stylesheet_link_tag "application" %>
-
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'defaults', 'data-turbolinks-track' => true %>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
 
@@ -24,7 +23,10 @@
   <li><%= link_to 'LOG OUT', destroy_user_session_path, method: :get  if current_user %>  </li>
 </ul>
 <br>
+<br>
+
     <%= yield %>
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"  crossorigin="anonymous"></script>    
