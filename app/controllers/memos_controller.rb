@@ -1,8 +1,8 @@
 class MemosController < ApplicationController
   
   def create
-    @memo = Memo.find_or_create_by(memo_params)
-    redirect_to lists_path
+    @memo = Memo.create(memo_params)
+      redirect_to lists_path
   end
 
   def update
