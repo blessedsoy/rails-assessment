@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+rails-assessment : this is rails web application about sample sales in NYC. Users can like or dislike sample sales, add a sample sale to their lists, leave memo on each sale, and see more info regarding the sale(like a map and hours).
 
-Things you may want to cover:
+User authentication is done by devise, and you can also log in with Facebook id.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To run this application, clone this repository and run 'rails s' on the directory of the application.
