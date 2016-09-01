@@ -1,8 +1,8 @@
-
-    <h1 class="center" style="margin-top: 70px">Summer Sample Sales in NYC</h1>
+<h1 class="center" style="margin-top: 40px">Summer Sample Sales in NYC</h1>
 <br>
 
 <div class="table-box centered-box2">
+
   <table class="table table-hover">
     <thead class="thead-inverse">
       <tr>
@@ -16,52 +16,36 @@
         <th>Total</th>
       </tr>
     </thead>
+    
     <tbody>
-      <%= form_tag(add_to_list_path) do %>
-      <% @sample_sales.each do |sample_sale| %>
+      <%= form_for @list, url: lists_path do |f|%>
+        <% @sample_sales.each do |sample_sale| %>
       <tr>
-        <td scope="row"><% if  !current_user || !(current_user.lists.any?{|x| x.sample_sale == sample_sale}) %>
-                <%= check_box_tag "sample_sales_ids[]", sample_sale.id, current_user && sample_sale.added_to_list?(current_user) ? true : false %>
-                <% end %>
-        </td>
-          <% if current_user %>
-            <td><%= link_to sample_sale.brand, sample_sale_path(sample_sale)%></td>
-            <td><%= link_to sample_sale.dates, sample_sale_path(sample_sale) %></td>
-            <td><%= link_to sample_sale.address, sample_sale_path(sample_sale) %></td>
-          <% else %>
-            <td><%= link_to sample_sale.brand, new_user_session_path %></td>
-            <td><%= link_to sample_sale.dates, new_user_session_path %></td>
-            <td><%= link_to sample_sale.address, new_user_session_path %></td>
+        <td scope="row">
+          <% if  sample_sale.is_not_in_lists_of(current_user) %>
+            
+            <%= check_box_tag "sample_sales_ids[]", sample_sale.id %>
           <% end %>
+        </td>
+       
+          <%= render partial: "link", locals: {sample_sale: sample_sale} %>
 
-            <td><% if current_user %>
-               <% if sample_sale.current_like(current_user.id) < 1 %>
-               <div class="">
-                <%= link_to "", like_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-o-up center like_before" %>                 
-               </div>
-              <% else %>
-                <div class="">
-                  <%= link_to "", like_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-up center like_after" %>
-                </div>  
-              <% end %>
-            <% else %>
-               <%= link_to "", new_user_session_path, class:"fa fa-thumbs-o-up center like_before" %>
-            <% end %></td>
+        <td>
+          <%= render partial: "like", locals: {sample_sale: sample_sale} %>
+        </td>
+
         <td class="total"><%= sample_sale.total_likes %></td>
-        <td><% if current_user %>
-              <% if sample_sale.current_dislike(current_user.id) > -1 %>
-                <%= link_to "", dislike_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-o-down dislike_before" %>
-              <% else %>
-                <%= link_to "", dislike_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-down dislike_after" %>
-              <% end %>
-             <% else %>
-               <%= link_to "",  new_user_session_path, class:"fa fa-thumbs-o-down dislike_before" %>
-            <% end %></td>
+
+        <td>
+          <%= render partial: "dislike", locals: {sample_sale: sample_sale} %>   
+        </td>
+
         <td class="total2"><%= sample_sale.total_dislikes %></td>
+        
       </tr>
-      <% end %>
+        <% end %>
         <div class="left"> 
-          <%= submit_tag "Add to my list", class:"btn btn-default"%>
+          <%= f.submit "Add to my list", class:"btn btn-default addToList"%>
         </div>
       <% end %>
 
@@ -72,6 +56,7 @@
 
     </tbody>
   </table>
+
 </div>
 
 
