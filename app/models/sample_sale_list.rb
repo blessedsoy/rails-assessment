@@ -1,0 +1,2 @@
+class SampleSaleList < ApplicationRecord
+end
