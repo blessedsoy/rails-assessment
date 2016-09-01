@@ -1,0 +1,11 @@
+<%= form_for(list.memo||Memo.new) do |f| %>
+  <%= f.hidden_field 'list_id', :value => list.id %>
+  <%= f.hidden_field 'id', :value => list.memo.id  if list.memo %>
+  <%= f.text_area :content, :placeholder => "update a memo", :rows => 2, :cols => 30 %>
+  <%= f.submit "Create", class:"btn btn-default btn-sm btn-success" if !list.memo %>
+
+  <div class="btn btn-group editDelete">
+  <%= f.submit "Edit", class:"btn btn-default btn-sm btn-info" if list.memo %>
+<% end %>
+  <%= button_to "Delete", memo_path(list.memo), method: :delete, class:"btn btn-default btn-sm btn-danger" if list.memo %> 
+ </div>
