@@ -1,5 +1,6 @@
 class SampleSale < ApplicationRecord
-  has_many :lists
+  has_many :sample_sale_lists
+  has_many :lists, through: :sample_sale_lists
   has_many :users, through: :lists
   has_many :votes
   
@@ -14,9 +15,9 @@ class SampleSale < ApplicationRecord
     sales_of_the_week
   end
 
-  def added_to_list?(id)
-    List.find_by(sample_sale_id: self.id, user_id: id)
-  end
+  # def added_to_list?(id)
+  #   List.find_by(sample_sale_id: self.id, user_id: id)
+  # end
 
   def total_likes
     self.votes.inject(0){|sum, v| sum + v.like }
@@ -40,6 +41,10 @@ class SampleSale < ApplicationRecord
     SampleSale.all.sort do |a, b|
       b.total_likes <=> a.total_likes
     end
+  end
+
+  def is_not_in_lists_of(current_user)
+    !current_user || !(current_user.lists.any?{|x| x.sample_sale == self})
   end
 
 end
