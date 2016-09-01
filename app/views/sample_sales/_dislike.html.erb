@@ -1,0 +1,9 @@
+<% if current_user %>
+  <% if sample_sale.current_dislike(current_user.id) > -1 %>
+    <%= link_to "", dislike_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-o-down dislike_before" %>
+  <% else %>
+    <%= link_to "", dislike_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-down dislike_after" %>
+  <% end %>
+<% else %>
+  <%= link_to "", dislike_path(sample_sale: sample_sale), class:"fa fa-thumbs-o-down dislike_before" %>
+<% end %> 
