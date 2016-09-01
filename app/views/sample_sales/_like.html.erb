@@ -1,0 +1,9 @@
+<% if current_user %>
+  <% if sample_sale.current_like(current_user.id) < 1 %>
+    <%= link_to "", like_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-o-up center like_before" %>                 
+  <% else %>
+    <%= link_to "", like_path(sample_sale: sample_sale), method: :get, class:"fa fa-thumbs-up center like_after" %>
+  <% end %>
+<% else %>
+  <%= link_to "", like_path(sample_sale: sample_sale), class:"fa fa-thumbs-o-up center like_before" %>
+<% end %>
